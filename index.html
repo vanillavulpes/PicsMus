@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html>
+<head><title>Radikel's Picture Museum</title></head>
+<style>
+body{
+    background: url("img/background.jpg");
+    background-repeat: repeat;
+}
+
+#title {
+	font-family: "Lucida Console", Monaco, monospace;
+	color: gray;
+	width: 330px;
+	margin: auto;
+	background-color: white;
+	border: 1px solid blue;
+	padding: 10px;
+}
+
+#intro {
+	background-color: white;
+	margin-left:20px;
+	border: 1px solid blue;
+	padding: 10px;
+}
+
+#questionnaire {
+	background-color: white;
+	margin-left:20px;
+	border: 1px solid blue;
+	padding: 10px;
+	font-size: 20px;
+}
+
+#result {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+</style>
+<script>
+var questions = ["ya feeling hot or cold",
+"how exactly are ya feelin",
+"how do you feel about hair?",
+"a single ponytail or twintails?",
+"how many stabby things you want?",
+"now how do you feel about traditional japanese clothing?",
+"okay if you had like a weapon and then one other thing in your hand, what would you want?",
+"else if you aren't feeling stabby, then are you feeling shooty?",
+"okay fine ya wimp. you want a hoodie?",
+"are you really gonna put it up?",
+"wow lame. and you call yourself edgy?",
+"pfft. wannabe.",
+"like what?",
+"and then?",
+"are you willing to read a couple words?",
+"well then how do you feel about shoulder-length hair?",
+"that waifu-material over there looks sad",
+"i think she's starting to cry",
+"alright long or short?",
+"okay how do you feel about hands vs no hands?",
+"alright now how about their clothes",
+"do you like kemonomimi?",
+"how many words?",
+"shooty with?",
+"no bullets? is it even a gun?",
+"which is hotter?",
+"do you wanna get hurt?",
+"would you like to see a male or a female?",
+"pants?",
+"sitting or standing?",
+"where would you wanna sit?",
+"okay do you want like dresses or skirts or something?",
+"so were you on santa's nice list this year?",
+"wow you must be butthurt",
+"alright alright chill. pick something to do.",
+"i get ya. how hot do you want it?",
+"HOW HOT?",
+"heheh. anything at all over the panties?",
+"heh. is she topless too?",
+"where do you want it?",
+"how is it?",
+"what kinda pain you lookin for?",
+"flowers?",
+"how do you feel right now?",
+"btw i just thought up some cool bag names. which one ya feelin?",
+"anyway how many faces do you want?",
+"blurred lines?",
+"how do you feel about spiky hair?",
+"do you like the color red?",
+"ahem."];
+
+var firstOption = [">cool as a cucumber",
+">stabby",
+">i like it done up",
+">pony",
+">ONE BIG ONE",
+">im not a weeb",
+">a book",
+">no violence pls",
+">heck yeah i can put up the hood and look edgy",
+">i told you i would",
+">okay maybe im not that edgy",
+">but i do other edgy things",
+">i mean, my hair kinda covers my eyes",
+">i even face my body away from people when looking at them",
+">im not even reading these questions",
+">i love it",
+">i want to protect that smile",
+">HAHA SHED MORE TEARS",
+">long",
+">i like em handless",
+">normal is fine",
+">ehehe i dooo",
+">i refuse to read more than two",
+">BULLETS OBVIOUSLY",
+">i think it is",
+">dat bod",
+">no i dont like pain",
+">show me the boiz",
+">pants",
+">all the kool kids sit",
+">by a lamppost or something, thats cool",
+">dresses and skirts are my fave",
+">no i dont need some arbitrary list to tell me whether ive been good or not",
+">wtf u mean ill wreck u m1 i swear on me mum",
+">clean",
+">HAWT",
+">HAWT AS TEH SUN AT THE BEACH",
+">huehue",
+">hue",
+">in the feels",
+">;-;",
+">the shooty kind",
+">flowers are for girls and wimps",
+">i feel anger which is one letter away from danger which is my middle name",
+">digital plastic",
+">one",
+">i hate that song",
+">just a little bit of spike is good",
+">red is stupid id rather have no color",
+">( .  Y  . )"];
+
+var secondOption = [">hawt",
+">not very stabby",
+">the way it falls naturally is best",
+">twin",
+">two smaller ones",
+">so pretty",
+">some necklace thing",
+">so shooty",
+">hoodies are for losers",
+">no",
+">so edgy i completely cover one of my eyes with my hair",
+">whatever i never even wanted to be in the first place",
+">spray painting is edgy right?",
+">i have a chain on my pants",
+">sure im game",
+">no inbetweens. only long or short",
+">who gives a crap",
+">okay im sorry",
+">short",
+">with hands duh",
+">shirtless",
+">no",
+">more is fine",
+">uhh not really bullets but like something else",
+">no its a stick that shoots magic",
+">dat face",
+">YES PLS",
+">show me the grils",
+">what are pants?",
+">standing is way more awesome",
+">im 2 cool 2 care",
+">huehuehuehue",
+">yep",
+">yeah :(",
+">eat candy or something idk",
+">huehuehue",
+">SO HAWT THEY MIGHT BE BAKED",
+">maebe",
+">of course she isnt im not a perv",
+">through my body",
+">its burning in my heart",
+">the stabby kind",
+">i love flowers",
+">pretty good",
+">real paper",
+">two",
+">what rhymes with hug me?",
+">NO SUCH THING AS TOO MUCH",
+">YESIDOYESIDOYESIDOYESIDOYESIDOYESIDO",
+">3==D"];
+
+function optionOne() {
+	if (document.getElementById("question").innerHTML == questions[0]){
+		document.getElementById("question").innerHTML = questions[1];
+		document.getElementById("choice1").innerHTML = firstOption[1];
+		document.getElementById("choice2").innerHTML = secondOption[1];
+	}
+	else if (document.getElementById("question").innerHTML == questions[1]){
+		document.getElementById("question").innerHTML = questions[2];
+		document.getElementById("choice1").innerHTML = firstOption[2];
+		document.getElementById("choice2").innerHTML = secondOption[2];
+	}
+	else if (document.getElementById("question").innerHTML == questions[2]){
+		document.getElementById("question").innerHTML = questions[3];
+		document.getElementById("choice1").innerHTML = firstOption[3];
+		document.getElementById("choice2").innerHTML = secondOption[3];
+	}
+	else if (document.getElementById("question").innerHTML == questions[3]){
+		document.getElementById("question").innerHTML = questions[4];
+		document.getElementById("choice1").innerHTML = firstOption[4];
+		document.getElementById("choice2").innerHTML = secondOption[4];
+	}
+	else if (document.getElementById("question").innerHTML == questions[4]){
+		document.getElementById("question").innerHTML = "Result:";
+		document.getElementById("choice1").innerHTML = "";
+		document.getElementById("choice2").innerHTML = "";
+		document.getElementById("winner").innerHTML = "There actually is something of a true end. Try to find it!";
+		var image = document.getElementById('result');
+		image.src = "img/4a.jpg";
+		image.width = "450";
+		image.height = "600";
+	}
+	else if (document.getElementById("question").innerHTML == questions[5]){
+		document.getElementById("question").innerHTML = questions[6];
+		document.getElementById("choice1").innerHTML = firstOption[6];
+		document.getElementById("choice2").innerHTML = secondOption[6];
+	}
+	else if (document.getElementById("question").innerHTML == questions[6]){
+		document.getElementById("question").innerHTML = "Result:";
+		document.getElementById("choice1").innerHTML = "";
+		document.getElementById("choice2").innerHTML = "";
+		document.getElementById("winner").innerHTML = "There actually is something of a true end. Try to find it!";
+		var image = document.getElementById('result');
+		image.src = "img/6a.jpg";
+		image.width = "450";
+		image.height = "600";
+	}
+	else if (document.getElementById("question").innerHTML == questions[7]){
+		document.getElementById("question").innerHTML = questions[8];
+		document.getElementById("choice1").innerHTML = firstOption[8];
+		document.getElementById("choice2").innerHTML = secondOption[8];
+	}
+	else if (document.getElementById("question").innerHTML == questions[8]){
+		document.getElementById("question").innerHTML = questions[9];
+		document.getElementById("choice1").innerHTML = firstOption[9];
+		document.getElementById("choice2").innerHTML = secondOption[9];
+	}
+	else if (document.getElementById("question").innerHTML == questions[9]){
+		document.getElementById("question").innerHTML = "Result:";
+		document.getElementById("choice1").innerHTML = "";
+		document.getElementById("choice2").innerHTML = "";
+		document.getElementById("winner").innerHTML = "There actually is something of a true end. Try to find it!";
+		var image = document.getElementById('result');
+		image.src = "img/9a.jpg";
+		image.width = "450";
+		image.height = "600";
+	}
+	else if (document.getElementById("question").innerHTML == questions[10]){
+		document.getElementById("question").innerHTML = questions[11];
+		document.getElementById("choice1").innerHTML = firstOption[11];
+		document.getElementById("choice2").innerHTML = secondOption[11];
+	}
+	else if (document.getElementById("question").innerHTML == questions[11]){
+		document.getElementById("question").innerHTML = questions[12];
+		document.getElementById("choice1").innerHTML = firstOption[12];
+		document.getElementById("choice2").innerHTML = secondOption[12];
+	}
+	else if (document.getElementById("question").innerHTML == questions[12]){
+		document.getElementById("question").innerHTML = "Result:";
+		document.getElementById("choice1").innerHTML = "";
+		document.getElementById("choice2").innerHTML = "";
+		document.getElementById("winner").innerHTML = "There actually is something of a true end. Try to find it!";
+		var image = document.getElementById('result');
+		image.src = "img/12a.jpg";
+		image.width = "450";
+		image.height = "600";
+	}
+	else if (document.getElementById("question").innerHTML == questions[13]){
+		document.getElementById("question").innerHTML = "Result:";
+		document.getElementById("choice1").innerHTML = "";
+		document.getElementById("choice2").innerHTML = "";
+		document.getElementById("winner").innerHTML = "There actually is something of a true end. Try to find it!";
+		var image = document.getElementById('result');
+		image.src = "img/13a.jpg";
+		image.width = "450";
+		image.height = "600";
+	}
+	else if (document.getElementById("question").innerHTML == questions[14]){
+		document.getElementById("question").innerHTML = questions[15];
+		document.getElementById("choice1").innerHTML = firstOption[15];
+		document.getElementById("choice2").innerHTML = secondOption[15];
+	}
+	else if (document.getElementById("question").innerHTML == questions[15]){
+		document.getElementById("question").innerHTML = questions[16];
+		document.getElementById("choice1").innerHTML = firstOption[16];
+		document.getElementById("choice2").innerHTML = secondOption[16];
+	}
+	else if (document.getElementById("question").innerHTML == questions[16]){
+		document.getElementById("question").innerHTML = "Result:";
+		document.getElementById("choice1").innerHTML = "";
+		document.getElementById("choice2").innerHTML = "";
+		document.getElementById("winner").innerHTML = "There actually is something of a true end. Try to find it!";
+		var image = document.getElementById('result');
+		image.src = "img/23a.jpg";
+		image.width = "450";
+		image.height = "600";
+	}
+	else if (document.getElementById("question").innerHTML == questions[17]){
+		document.getElementById("question").innerHTML = "Result:";
+		document.getElementById("choice1").innerHTML = "";
+		document.getElementById("choice2").innerHTML = "";
+		document.getElementById("winner").innerHTML = "There actually is something of a true end. Try to find it!";
+		var image = document.getElementById('result');
+		image.src = "img/17a.jpg";
+		image.width = "450";
+		image.height = "600";
+	}
+	else if (document.getElementById("question").innerHTML == questions[18]){
+		document.getElementById("question").innerHTML = questions[19];
+		document.getElementById("choice1").innerHTML = firstOption[19];
+		document.getElementById("choice2").innerHTML = secondOption[19];
+	}
+	else if (document.getElementById("question").innerHTML == questions[19]){
+		document.getElementById("question").innerHTML = questions[20];
+		document.getElementById("choice1").innerHTML = firstOption[20];
+		document.getElementById("choice2").innerHTML = secondOption[20];
+	}
+	else if (document.getElementById("question").innerHTML == questions[20]){
+		document.getElementById("question").innerHTML = "Result:";
+		document.getElementById("choice1").innerHTML = "";
+		document.getElementById("choice2").innerHTML = "";
+		document.getElementById("winner").innerHTML = "There actually is something of a true end. Try to find it!";
+		var image = document.getElementById('result');
+		image.src = "img/20a.jpg";
+		image.width = "450";
+		image.height = "600";
+	}
+	else if (document.getElementById("question").innerHTML == questions[21]){
+		document.getElementById("question").innerHTML = "Result:";
+		document.getElementById("choice1").innerHTML = "";
+		document.getElementById("choice2").innerHTML = "";
+		document.getElementById("winner").innerHTML = "There actually is something of a true end. Try to find it!";
+		var image = document.getElementById('result');
+		image.src = "img/21a.jpg";
+		image.width = "450";
+		image.height = "600";
+	}
+	else if (document.getElementById("question").innerHTML == questions[22]){
+		document.getElementById("question").innerHTML = "Result:";
+		document.getElementById("choice1").innerHTML = "";
+		document.getElementById("choice2").innerHTML = "";
+		document.getElementById("winner").innerHTML = "Congratulations! You have reached what can be called the true end. Merry PicsMus, Radikel!";
+		var image = document.getElementById('result');
+		image.src = "img/22a.jpg";
+		image.width = "450";
+		image.height = "600";
+	}
+	else if (document.getElementById("question").innerHTML == questions[23]){
+		document.getElementById("question").innerHTML = "Result:";
+		document.getElementById("choice1").innerHTML = "";
+		document.getElementById("choice2").innerHTML = "";
+		document.getElementById("winner").innerHTML = "There actually is something of a true end. Try to find it!";
+		var image = document.getElementById('result');
+		image.src = "img/23a.jpg";
+		image.width = "800";
+		image.height = "600";
+	}
+	else if (document.getElementById("question").innerHTML == questions[24]){
+		document.getElementById("question").innerHTML = "Result:";
+		document.getElementById("choice1").innerHTML = "";
+		document.getElementById("choice2").innerHTML = "";
+		document.getElementById("winner").innerHTML = "There actually is something of a true end. Try to find it!";
+		var image = document.getElementById('result');
+		image.src = "img/24a.jpg";
+		image.width = "800";
+		image.height = "600";
+	}
+	else if (document.getElementById("question").innerHTML == questions[25]){
+		document.getElementById("question").innerHTML = questions[26];
+		document.getElementById("choice1").innerHTML = firstOption[26];
+		document.getElementById("choice2").innerHTML = secondOption[26];
+	}
+	else if (document.getElementById("question").innerHTML == questions[26]){
+		document.getElementById("question").innerHTML = questions[27];
+		document.getElementById("choice1").innerHTML = firstOption[27];
+		document.getElementById("choice2").innerHTML = secondOption[27];
+	}
+	else if (document.getElementById("question").innerHTML == questions[27]){
+		document.getElementById("question").innerHTML = "nope";
+		document.getElementById("choice1").innerHTML = "too bad. we aint got none of them around these parts";
+		document.getElementById("choice2").innerHTML = "try again";
+	}
+	else if (document.getElementById("question").innerHTML == questions[28]){
+		document.getElementById("question").innerHTML = questions[29];
+		document.getElementById("choice1").innerHTML = firstOption[29];
+		document.getElementById("choice2").innerHTML = secondOption[29];
+	}
+	else if (document.getElementById("question").innerHTML == questions[29]){
+		document.getElementById("question").innerHTML = questions[30];
+		document.getElementById("choice1").innerHTML = firstOption[30];
+		document.getElementById("choice2").innerHTML = secondOption[30];
+	}
+	else if (document.getElementById("question").innerHTML == questions[30]){
+		document.getElementById("question").innerHTML = "Result:";
+		document.getElementById("choice1").innerHTML = "";
+		document.getElementById("choice2").innerHTML = "";
+		document.getElementById("winner").innerHTML = "There actually is something of a true end. Try to find it!";
+		var image = document.getElementById('result');
+		image.src = "img/30a.jpg";
+		image.width = "800";
+		image.height = "600";
+	}
+	else if (document.getElementById("question").innerHTML == questions[31]){
+		document.getElementById("question").innerHTML = questions[32];
+		document.getElementById("choice1").innerHTML = firstOption[32];
+		document.getElementById("choice2").innerHTML = secondOption[32];
+	}
+	else if (document.getElementById("question").innerHTML == questions[32]){
+		document.getElementById("question").innerHTML = questions[33];
+		document.getElementById("choice1").innerHTML = firstOption[33];
+		document.getElementById("choice2").innerHTML = secondOption[33];
+	}
+	else if (document.getElementById("question").innerHTML == questions[33]){
+		document.getElementById("question").innerHTML = questions[34];
+		document.getElementById("choice1").innerHTML = firstOption[34];
+		document.getElementById("choice2").innerHTML = secondOption[34];
+	}
+	else if (document.getElementById("question").innerHTML == questions[34]){
+		document.getElementById("question").innerHTML = "Result:";
+		document.getElementById("choice1").innerHTML = "";
+		document.getElementById("choice2").innerHTML = "";
+		document.getElementById("winner").innerHTML = "There actually is something of a true end. Try to find it!";
+		var image = document.getElementById('result');
+		image.src = "img/34a.jpg";
+		image.width = "450";
+		image.height = "600";
+	}
+	else if (document.getElementById("question").innerHTML == questions[35]){
+		document.getElementById("question").innerHTML = questions[36];
+		document.getElementById("choice1").innerHTML = firstOption[36];
+		document.getElementById("choice2").innerHTML = secondOption[36];
+	}
+	else if (document.getElementById("question").innerHTML == questions[36]){
+		document.getElementById("question").innerHTML = "Result:";
+		document.getElementById("choice1").innerHTML = "";
+		document.getElementById("choice2").innerHTML = "";
+		document.getElementById("winner").innerHTML = "There actually is something of a true end. Try to find it!";
+		var image = document.getElementById('result');
+		image.src = "img/36a.jpg";
+		image.width = "800";
+		image.height = "600";
+	}
+	else if (document.getElementById("question").innerHTML == questions[37]){
+		document.getElementById("question").innerHTML = questions[38];
+		document.getElementById("choice1").innerHTML = firstOption[38];
+		document.getElementById("choice2").innerHTML = secondOption[38];
+	}
+	else if (document.getElementById("question").innerHTML == questions[38]){
+		document.getElementById("question").innerHTML = "Result:";
+		document.getElementById("choice1").innerHTML = "";
+		document.getElementById("choice2").innerHTML = "";
+		document.getElementById("winner").innerHTML = "There actually is something of a true end. Try to find it!";
+		var image = document.getElementById('result');
+		image.src = "img/38a.jpg";
+		image.width = "800";
+		image.height = "600";
+	}
+	else if (document.getElementById("question").innerHTML == questions[39]){
+		document.getElementById("question").innerHTML = questions[40];
+		document.getElementById("choice1").innerHTML = firstOption[40];
+		document.getElementById("choice2").innerHTML = secondOption[40];
+	}
+	else if (document.getElementById("question").innerHTML == questions[40]){
+		document.getElementById("question").innerHTML = "Result:";
+		document.getElementById("choice1").innerHTML = "";
+		document.getElementById("choice2").innerHTML = "";
+		document.getElementById("winner").innerHTML = "There actually is something of a true end. Try to find it!";
+		var image = document.getElementById('result');
+		image.src = "img/40a.jpg";
+		image.width = "800";
+		image.height = "600";
+	}
+	else if (document.getElementById("question").innerHTML == questions[41]){
+		document.getElementById("question").innerHTML = "Result:";
+		document.getElementById("choice1").innerHTML = "";
+		document.getElementById("choice2").innerHTML = "";
+		document.getElementById("winner").innerHTML = "There actually is something of a true end. Try to find it!";
+		var image = document.getElementById('result');
+		image.src = "img/41a.jpg";
+		image.width = "450";
+		image.height = "600";
+	}
+	else if (document.getElementById("question").innerHTML == questions[42]){
+		document.getElementById("question").innerHTML = "Result:";
+		document.getElementById("choice1").innerHTML = "";
+		document.getElementById("choice2").innerHTML = "";
+		document.getElementById("winner").innerHTML = "There actually is something of a true end. Try to find it!";
+		var image = document.getElementById('result');
+		image.src = "img/42a.jpg";
+		image.width = "450";
+		image.height = "600";
+	}
+	else if (document.getElementById("question").innerHTML == questions[43]){
+		document.getElementById("question").innerHTML = questions[44];
+		document.getElementById("choice1").innerHTML = firstOption[44];
+		document.getElementById("choice2").innerHTML = secondOption[44];
+	}
+	else if (document.getElementById("question").innerHTML == questions[44]){
+		document.getElementById("question").innerHTML = questions[45];
+		document.getElementById("choice1").innerHTML = firstOption[45];
+		document.getElementById("choice2").innerHTML = secondOption[45];
+	}
+	else if (document.getElementById("question").innerHTML == questions[45]){
+		document.getElementById("question").innerHTML = "Result:";
+		document.getElementById("choice1").innerHTML = "";
+		document.getElementById("choice2").innerHTML = "";
+		document.getElementById("winner").innerHTML = "There actually is something of a true end. Try to find it!";
+		var image = document.getElementById('result');
+		image.src = "img/45a.jpg";
+		image.width = "554";
+		image.height = "600";
+	}
+	else if (document.getElementById("question").innerHTML == questions[46]){
+		document.getElementById("question").innerHTML = "Result:";
+		document.getElementById("choice1").innerHTML = "";
+		document.getElementById("choice2").innerHTML = "";
+		document.getElementById("winner").innerHTML = "There actually is something of a true end. Try to find it!";
+		var image = document.getElementById('result');
+		image.src = "img/46a.jpg";
+		image.width = "450";
+		image.height = "600";
+	}
+	else if (document.getElementById("question").innerHTML == questions[47]){
+		document.getElementById("question").innerHTML = questions[48];
+		document.getElementById("choice1").innerHTML = firstOption[48];
+		document.getElementById("choice2").innerHTML = secondOption[48];
+	}
+	else if (document.getElementById("question").innerHTML == questions[48]){
+		document.getElementById("question").innerHTML = "Result:";
+		document.getElementById("choice1").innerHTML = "";
+		document.getElementById("choice2").innerHTML = "";
+		document.getElementById("winner").innerHTML = "There actually is something of a true end. Try to find it!";
+		var image = document.getElementById('result');
+		image.src = "img/48a.jpg";
+		image.width = "450";
+		image.height = "600";
+	}
+	else if (document.getElementById("question").innerHTML == questions[49]){
+		document.getElementById("question").innerHTML = "Result:";
+		document.getElementById("choice1").innerHTML = "";
+		document.getElementById("choice2").innerHTML = "";
+		document.getElementById("winner").innerHTML = "There actually is something of a true end. Try to find it!";
+		var image = document.getElementById('result');
+		image.src = "img/49a.jpg";
+		image.width = "450";
+		image.height = "600";
+	}
+}
+
+function optionTwo() {
+	if (document.getElementById("question").innerHTML == questions[0]){
+		document.getElementById("question").innerHTML = questions[25];
+		document.getElementById("choice1").innerHTML = firstOption[25];
+		document.getElementById("choice2").innerHTML = secondOption[25];
+	}
+	else if (document.getElementById("question").innerHTML == questions[1]){
+		document.getElementById("question").innerHTML = questions[7];
+		document.getElementById("choice1").innerHTML = firstOption[7];
+		document.getElementById("choice2").innerHTML = secondOption[7];
+	}
+	else if (document.getElementById("question").innerHTML == questions[2]){
+		document.getElementById("question").innerHTML = questions[5];
+		document.getElementById("choice1").innerHTML = firstOption[5];
+		document.getElementById("choice2").innerHTML = secondOption[5];
+	}
+	else if (document.getElementById("question").innerHTML == questions[3]){
+		document.getElementById("question").innerHTML = "Result:";
+		document.getElementById("choice1").innerHTML = "";
+		document.getElementById("choice2").innerHTML = "";
+		document.getElementById("winner").innerHTML = "There actually is something of a true end. Try to find it!";
+		var image = document.getElementById('result');
+		image.src = "img/3b.jpg";
+		image.width = "450";
+		image.height = "600";
+	}
+	else if (document.getElementById("question").innerHTML == questions[4]){
+		document.getElementById("question").innerHTML = "Result:";
+		document.getElementById("choice1").innerHTML = "";
+		document.getElementById("choice2").innerHTML = "";
+		document.getElementById("winner").innerHTML = "There actually is something of a true end. Try to find it!";
+		var image = document.getElementById('result');
+		image.src = "img/4b.jpg";
+		image.width = "800";
+		image.height = "600";
+	}
+	else if (document.getElementById("question").innerHTML == questions[5]){
+		document.getElementById("question").innerHTML = "Result:";
+		document.getElementById("choice1").innerHTML = "";
+		document.getElementById("choice2").innerHTML = "";
+		document.getElementById("winner").innerHTML = "There actually is something of a true end. Try to find it!";
+		var image = document.getElementById('result');
+		image.src = "img/5b.jpg";
+		image.width = "800";
+		image.height = "600";
+	}
+	else if (document.getElementById("question").innerHTML == questions[6]){
+		document.getElementById("question").innerHTML = "Result:";
+		document.getElementById("choice1").innerHTML = "";
+		document.getElementById("choice2").innerHTML = "";
+		document.getElementById("winner").innerHTML = "There actually is something of a true end. Try to find it!";
+		var image = document.getElementById('result');
+		image.src = "img/6b.jpg";
+		image.width = "450";
+		image.height = "600";
+	}
+	else if (document.getElementById("question").innerHTML == questions[7]){
+		document.getElementById("question").innerHTML = questions[23];
+		document.getElementById("choice1").innerHTML = firstOption[23];
+		document.getElementById("choice2").innerHTML = secondOption[23];
+	}
+	else if (document.getElementById("question").innerHTML == questions[8]){
+		document.getElementById("question").innerHTML = questions[14];
+		document.getElementById("choice1").innerHTML = firstOption[14];
+		document.getElementById("choice2").innerHTML = secondOption[14];
+	}
+	else if (document.getElementById("question").innerHTML == questions[9]){
+		document.getElementById("question").innerHTML = questions[10];
+		document.getElementById("choice1").innerHTML = firstOption[10];
+		document.getElementById("choice2").innerHTML = secondOption[10];
+	}
+	else if (document.getElementById("question").innerHTML == questions[10]){
+		document.getElementById("question").innerHTML = questions[13];
+		document.getElementById("choice1").innerHTML = firstOption[13];
+		document.getElementById("choice2").innerHTML = secondOption[13];
+	}
+	else if (document.getElementById("question").innerHTML == questions[11]){
+		document.getElementById("question").innerHTML = "Result:";
+		document.getElementById("choice1").innerHTML = "";
+		document.getElementById("choice2").innerHTML = "";
+		document.getElementById("winner").innerHTML = "There actually is something of a true end. Try to find it!";
+		var image = document.getElementById('result');
+		image.src = "img/11b.jpg";
+		image.width = "450";
+		image.height = "600";
+	}
+	else if (document.getElementById("question").innerHTML == questions[12]){
+		document.getElementById("question").innerHTML = "Result:";
+		document.getElementById("choice1").innerHTML = "";
+		document.getElementById("choice2").innerHTML = "";
+		document.getElementById("winner").innerHTML = "There actually is something of a true end. Try to find it!";
+		var image = document.getElementById('result');
+		image.src = "img/12b.jpg";
+		image.width = "450";
+		image.height = "600";
+	}
+	else if (document.getElementById("question").innerHTML == questions[13]){
+		document.getElementById("question").innerHTML = "Result:";
+		document.getElementById("choice1").innerHTML = "";
+		document.getElementById("choice2").innerHTML = "";
+		document.getElementById("winner").innerHTML = "There actually is something of a true end. Try to find it!";
+		var image = document.getElementById('result');
+		image.src = "img/13b.jpg";
+		image.width = "450";
+		image.height = "600";
+	}
+	else if (document.getElementById("question").innerHTML == questions[14]){
+		document.getElementById("question").innerHTML = questions[22];
+		document.getElementById("choice1").innerHTML = firstOption[22];
+		document.getElementById("choice2").innerHTML = secondOption[22];
+	}
+	else if (document.getElementById("question").innerHTML == questions[15]){
+		document.getElementById("question").innerHTML = questions[18];
+		document.getElementById("choice1").innerHTML = firstOption[18];
+		document.getElementById("choice2").innerHTML = secondOption[18];
+	}
+	else if (document.getElementById("question").innerHTML == questions[16]){
+		document.getElementById("question").innerHTML = questions[17];
+		document.getElementById("choice1").innerHTML = firstOption[17];
+		document.getElementById("choice2").innerHTML = secondOption[17];
+	}
+	else if (document.getElementById("question").innerHTML == questions[17]){
+		document.getElementById("question").innerHTML = "Result:";
+		document.getElementById("choice1").innerHTML = "";
+		document.getElementById("choice2").innerHTML = "";
+		document.getElementById("winner").innerHTML = "There actually is something of a true end. Try to find it!";
+		var image = document.getElementById('result');
+		image.src = "img/17b.jpg";
+		image.width = "450";
+		image.height = "600";
+	}
+	else if (document.getElementById("question").innerHTML == questions[18]){
+		document.getElementById("question").innerHTML = questions[21];
+		document.getElementById("choice1").innerHTML = firstOption[21];
+		document.getElementById("choice2").innerHTML = secondOption[21];
+	}
+	else if (document.getElementById("question").innerHTML == questions[19]){
+		document.getElementById("question").innerHTML = "nope";
+		document.getElementById("choice1").innerHTML = "too bad. we aint got none of them around these parts";
+		document.getElementById("choice2").innerHTML = "try again";
+	}
+	else if (document.getElementById("question").innerHTML == questions[20]){
+		document.getElementById("question").innerHTML = "Result:";
+		document.getElementById("choice1").innerHTML = "";
+		document.getElementById("choice2").innerHTML = "";
+		document.getElementById("winner").innerHTML = "There actually is something of a true end. Try to find it!";
+		var image = document.getElementById('result');
+		image.src = "img/20b.jpg";
+		image.width = "450";
+		image.height = "600";
+	}
+	else if (document.getElementById("question").innerHTML == questions[21]){
+		document.getElementById("question").innerHTML = "Result:";
+		document.getElementById("choice1").innerHTML = "";
+		document.getElementById("choice2").innerHTML = "";
+		document.getElementById("winner").innerHTML = "There actually is something of a true end. Try to find it!";
+		var image = document.getElementById('result');
+		image.src = "img/21b.jpg";
+		image.width = "450";
+		image.height = "600";
+	}
+	else if (document.getElementById("question").innerHTML == questions[22]){
+		document.getElementById("question").innerHTML = "Result:";
+		document.getElementById("choice1").innerHTML = "";
+		document.getElementById("choice2").innerHTML = "";
+		document.getElementById("winner").innerHTML = "There actually is something of a true end. Try to find it!";
+		var image = document.getElementById('result');
+		image.src = "img/22b.jpg";
+		image.width = "450";
+		image.height = "600";
+	}
+	else if (document.getElementById("question").innerHTML == questions[23]){
+		document.getElementById("question").innerHTML = questions[24];
+		document.getElementById("choice1").innerHTML = firstOption[24];
+		document.getElementById("choice2").innerHTML = secondOption[24];
+	}
+	else if (document.getElementById("question").innerHTML == questions[24]){
+		document.getElementById("question").innerHTML = "Result:";
+		document.getElementById("choice1").innerHTML = "";
+		document.getElementById("choice2").innerHTML = "";
+		document.getElementById("winner").innerHTML = "There actually is something of a true end. Try to find it!";
+		var image = document.getElementById('result');
+		image.src = "img/24b.jpg";
+		image.width = "800";
+		image.height = "600";
+	}
+	else if (document.getElementById("question").innerHTML == questions[25]){
+		document.getElementById("question").innerHTML = questions[43];
+		document.getElementById("choice1").innerHTML = firstOption[43];
+		document.getElementById("choice2").innerHTML = secondOption[43];
+	}
+	else if (document.getElementById("question").innerHTML == questions[26]){
+		document.getElementById("question").innerHTML = questions[39];
+		document.getElementById("choice1").innerHTML = firstOption[39];
+		document.getElementById("choice2").innerHTML = secondOption[39];
+	}
+	else if (document.getElementById("question").innerHTML == questions[27]){
+		document.getElementById("question").innerHTML = questions[28];
+		document.getElementById("choice1").innerHTML = firstOption[28];
+		document.getElementById("choice2").innerHTML = secondOption[28];
+	}
+	else if (document.getElementById("question").innerHTML == questions[28]){
+		document.getElementById("question").innerHTML = questions[31];
+		document.getElementById("choice1").innerHTML = firstOption[31];
+		document.getElementById("choice2").innerHTML = secondOption[31];
+	}
+	else if (document.getElementById("question").innerHTML == questions[29]){
+		document.getElementById("question").innerHTML = "Result:";
+		document.getElementById("choice1").innerHTML = "";
+		document.getElementById("choice2").innerHTML = "";
+		document.getElementById("winner").innerHTML = "There actually is something of a true end. Try to find it!";
+		var image = document.getElementById('result');
+		image.src = "img/29b.jpg";
+		image.width = "450";
+		image.height = "600";
+	}
+	else if (document.getElementById("question").innerHTML == questions[30]){
+		document.getElementById("question").innerHTML = "Result:";
+		document.getElementById("choice1").innerHTML = "";
+		document.getElementById("choice2").innerHTML = "";
+		document.getElementById("winner").innerHTML = "There actually is something of a true end. Try to find it!";
+		var image = document.getElementById('result');
+		image.src = "img/30b.jpg";
+		image.width = "800";
+		image.height = "600";
+	}
+	else if (document.getElementById("question").innerHTML == questions[31]){
+		document.getElementById("question").innerHTML = questions[35];
+		document.getElementById("choice1").innerHTML = firstOption[35];
+		document.getElementById("choice2").innerHTML = secondOption[35];
+	}
+	else if (document.getElementById("question").innerHTML == questions[32]){
+		document.getElementById("question").innerHTML = "Result:";
+		document.getElementById("choice1").innerHTML = "";
+		document.getElementById("choice2").innerHTML = "";
+		document.getElementById("winner").innerHTML = "There actually is something of a true end. Try to find it!";
+		var image = document.getElementById('result');
+		image.src = "img/32b.jpg";
+		image.width = "450";
+		image.height = "600";
+	}
+	else if (document.getElementById("question").innerHTML == questions[33]){
+		document.getElementById("question").innerHTML = "Result:";
+		document.getElementById("choice1").innerHTML = "";
+		document.getElementById("choice2").innerHTML = "";
+		document.getElementById("winner").innerHTML = "There actually is something of a true end. Try to find it!";
+		var image = document.getElementById('result');
+		image.src = "img/33b.jpg";
+		image.width = "450";
+		image.height = "600";
+	}
+	else if (document.getElementById("question").innerHTML == questions[34]){
+		document.getElementById("question").innerHTML = "Result:";
+		document.getElementById("choice1").innerHTML = "";
+		document.getElementById("choice2").innerHTML = "";
+		document.getElementById("winner").innerHTML = "There actually is something of a true end. Try to find it!";
+		var image = document.getElementById('result');
+		image.src = "img/34b.jpg";
+		image.width = "450";
+		image.height = "600";
+	}
+	else if (document.getElementById("question").innerHTML == questions[35]){
+		document.getElementById("question").innerHTML = questions[37];
+		document.getElementById("choice1").innerHTML = firstOption[37];
+		document.getElementById("choice2").innerHTML = secondOption[37];
+	}
+	else if (document.getElementById("question").innerHTML == questions[36]){
+		document.getElementById("question").innerHTML = "Result:";
+		document.getElementById("choice1").innerHTML = "";
+		document.getElementById("choice2").innerHTML = "";
+		document.getElementById("winner").innerHTML = "There actually is something of a true end. Try to find it!";
+		var image = document.getElementById('result');
+		image.src = "img/36b.jpg";
+		image.width = "450";
+		image.height = "600";
+	}
+	else if (document.getElementById("question").innerHTML == questions[37]){
+		document.getElementById("question").innerHTML = "Result:";
+		document.getElementById("choice1").innerHTML = "";
+		document.getElementById("choice2").innerHTML = "";
+		document.getElementById("winner").innerHTML = "There actually is something of a true end. Try to find it!";
+		var image = document.getElementById('result');
+		image.src = "img/37b.jpg";
+		image.width = "450";
+		image.height = "600";
+	}
+	else if (document.getElementById("question").innerHTML == questions[38]){
+		document.getElementById("question").innerHTML = "Result:";
+		document.getElementById("choice1").innerHTML = "";
+		document.getElementById("choice2").innerHTML = "";
+		document.getElementById("winner").innerHTML = "There actually is something of a true end. Try to find it!";
+		var image = document.getElementById('result');
+		image.src = "img/38b.jpg";
+		image.width = "800";
+		image.height = "600";
+	}
+	else if (document.getElementById("question").innerHTML == questions[39]){
+		document.getElementById("question").innerHTML = questions[41];
+		document.getElementById("choice1").innerHTML = firstOption[41];
+		document.getElementById("choice2").innerHTML = secondOption[41];
+	}
+	else if (document.getElementById("question").innerHTML == questions[40]){
+		document.getElementById("question").innerHTML = "Result:";
+		document.getElementById("choice1").innerHTML = "";
+		document.getElementById("choice2").innerHTML = "";
+		document.getElementById("winner").innerHTML = "There actually is something of a true end. Try to find it!";
+		var image = document.getElementById('result');
+		image.src = "img/40b.jpg";
+		image.width = "724";
+		image.height = "600";
+	}
+	else if (document.getElementById("question").innerHTML == questions[41]){
+		document.getElementById("question").innerHTML = questions[42];
+		document.getElementById("choice1").innerHTML = firstOption[42];
+		document.getElementById("choice2").innerHTML = secondOption[42];
+	}
+	else if (document.getElementById("question").innerHTML == questions[42]){
+		document.getElementById("question").innerHTML = "Result:";
+		document.getElementById("choice1").innerHTML = "";
+		document.getElementById("choice2").innerHTML = "";
+		document.getElementById("winner").innerHTML = "There actually is something of a true end. Try to find it!";
+		var image = document.getElementById('result');
+		image.src = "img/42b.jpg";
+		image.width = "800";
+		image.height = "600";
+	}
+	else if (document.getElementById("question").innerHTML == questions[43]){
+		document.getElementById("question").innerHTML = questions[47];
+		document.getElementById("choice1").innerHTML = firstOption[47];
+		document.getElementById("choice2").innerHTML = secondOption[47];
+	}
+	else if (document.getElementById("question").innerHTML == questions[44]){
+		document.getElementById("question").innerHTML = questions[46];
+		document.getElementById("choice1").innerHTML = firstOption[46];
+		document.getElementById("choice2").innerHTML = secondOption[46];
+	}
+	else if (document.getElementById("question").innerHTML == questions[45]){
+		document.getElementById("question").innerHTML = "Result:";
+		document.getElementById("choice1").innerHTML = "";
+		document.getElementById("choice2").innerHTML = "";
+		document.getElementById("winner").innerHTML = "There actually is something of a true end. Try to find it!";
+		var image = document.getElementById('result');
+		image.src = "img/45b.jpg";
+		image.width = "960";
+		image.height = "600";
+	}
+	else if (document.getElementById("question").innerHTML == questions[46]){
+		document.getElementById("question").innerHTML = "Result:";
+		document.getElementById("choice1").innerHTML = "";
+		document.getElementById("choice2").innerHTML = "";
+		document.getElementById("winner").innerHTML = "There actually is something of a true end. Try to find it!";
+		var image = document.getElementById('result');
+		image.src = "img/47b.jpg";
+		image.width = "450";
+		image.height = "600";
+	}
+	else if (document.getElementById("question").innerHTML == questions[47]){
+		document.getElementById("question").innerHTML = questions[49];
+		document.getElementById("choice1").innerHTML = firstOption[49];
+		document.getElementById("choice2").innerHTML = secondOption[49];
+	}
+	else if (document.getElementById("question").innerHTML == questions[48]){
+		document.getElementById("question").innerHTML = "Result:";
+		document.getElementById("choice1").innerHTML = "";
+		document.getElementById("choice2").innerHTML = "";
+		document.getElementById("winner").innerHTML = "There actually is something of a true end. Try to find it!";
+		var image = document.getElementById('result');
+		image.src = "img/48b.jpg";
+		image.width = "450";
+		image.height = "600";
+	}
+	else if (document.getElementById("question").innerHTML == questions[49]){
+		document.getElementById("question").innerHTML = "Result:";
+		document.getElementById("choice1").innerHTML = "";
+		document.getElementById("choice2").innerHTML = "";
+		document.getElementById("winner").innerHTML = "There actually is something of a true end. Try to find it!";
+		var image = document.getElementById('result');
+		image.src = "img/49b.jpg";
+		image.width = "450";
+		image.height = "600";
+	}
+}	
+
+function reset() {
+		document.getElementById("question").innerHTML = questions[0];
+		document.getElementById("choice1").innerHTML = firstOption[0];
+		document.getElementById("choice2").innerHTML = secondOption[0];
+		document.getElementById("winner").innerHTML = "";
+		var image = document.getElementById('result');
+		image.src = "img/";
+		image.width = "";
+		image.height = "";
+}
+
+</script>
+<body>
+<h1 id="title" style=font-size:75px>PicsMus</h1>
+<hr>
+<p id="intro" style=font-size:20px>Welcome to this ugly little website that I spent hours on! Er, I mean PicsMus! This is a small online picture museum containing only the works of Radikel! Just click the answers to the questions below and eventually you'll end up at a picture tailored to your responses. Neat, huh? Try it out! ~Anevie</p>
+
+<div id="questionnaire">
+<p id="question">ya feeling hot or cold</p>
+<p id="choice1" onclick="optionOne()">>cool as a cucumber</p>
+<p id="choice2" onclick="optionTwo()">>hawt</p>
+<img id="result" src="" width="" height="">
+<p id="winner"></p>
+<button type="button" onclick="reset()">Reset</button>
+</div>
+</body>
+</html>
